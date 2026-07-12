@@ -1,11 +1,11 @@
 # SEC-OPS-Lab: Security Operations Lab
-**Modular Security Operations, Network Traffic Sniffing, and Automated Containment**
+**Simple Security Operations, Network Traffic Sniffing, and Automated Containment**
 
 ---
 
 ## About the Project
 
-A security operations control panel that bridges custom Python orchestration with native Linux binaries. The system brings core defensive capabilities—including vulnerability scanning, real-time log monitoring, packet analysis, firewall hardening, and immediate network isolation—into a unified desktop interface for an Ubuntu deployment.
+A security operations control panel that bridges custom Python orchestration with native Linux binaries. The system brings core defensive capabilities like vulnerability scanning, real-time log monitoring, packet analysis, firewall hardening, and immediate network isolation into a unified desktop interface for an Ubuntu deployment.
 
 ![Project Dashboard Overview](assets/image1.png)
 
@@ -18,14 +18,14 @@ A security operations control panel that bridges custom Python orchestration wit
 | **Vulnerability Scanner** | Handles network footprinting sweeps using `nmap` to audit open ports and service banners. |
 | **Log Monitor / IDS** | Parses `/var/log/auth.log` via a non-blocking asynchronous streaming worker to flag authentication failures instantly. |
 | **Traffic Analyzer** | Utilizes a snapshot capture engine backed by `tcpdump` to extract connection tracking telemetry and flag traffic volume anomalies. |
-| **System Hardening** | Interacts with the Uncomplicated Firewall (`ufw`) subsystem to enforce a default-deny inbound posture. |
+| **System Hardening** | Interacts with the Uncomplicated Firewall `(ufw)` subsystem to enforce a default-deny inbound posture. |
 | **Incident Response** | Functions as a network kill-switch to immediately isolate physical or virtual interface links during an active compromise. |
 
 ---
 
 ## Technical Architecture
 
-A multi-threaded Python front-end built using `customtkinter` that spawns asynchronous subprocess pipelines to securely drive root-level system scripts.
+A multi-threaded Python front-end built using customtkinter that spawns asynchronous subprocess pipelines to securely drive root-level system scripts.
 
 ![System Architecture and Process Routing](assets/image2.png)
 
@@ -33,53 +33,79 @@ A multi-threaded Python front-end built using `customtkinter` that spawns asynch
 
 ## Configuration and Implementation
 
-### 1. Snapshot Network Traffic Analysis
+### 1. Automated Vulnerability Assessment
 
-The traffic engine captures raw network packet frames directly from the active interface using a finite snapshot window before running statistical calculations to identify anomalies:
+The scanning engine launches non-destructive network footprinting sweeps against specified target hosts to map the active attack surface and audit open port states:
 
 ```bash
-tcpdump -i "$INTERFACE" -c "$PACKET_COUNT" -nn -w "$CAPTURE_FILE" 2>/dev/null
+nmap -sV -p- --open "$TARGET_IP" -oN "$SCAN_OUTPUT_FILE"
 ```
 
-Heuristic parsing instantly breaks down traffic protocols and reports top connection talkers to the interface display.
+The application parses the output to display live port metrics and service configurations directly onto the dashboard.
 
-![Network Traffic Analyzer Interface](assets/image3.png)
+![Vulnerability Scanner Interface](assets/image3.png)
 
 ### 2. Multi-Threaded Real-Time Log Monitoring
 
-To keep the GUI responsive while streaming live data, the Intrusion Detection Module spans a background thread using Python's `threading` library, piping stdout sequentially from the core monitoring engine.
+To keep the GUI fluid and responsive while processing continuous file streams, the Intrusion Detection module offloads execution to a background worker thread, sequentially tracking system authentication logs:
 
 ```python
 self.monitor_thread = threading.Thread(target=self.log_stream_worker, daemon=True)
 self.monitor_thread.start()
 ```
 
+The underlying script continuously tails /var/log/auth.log to parse and highlight active authentication failures.
+
 ![Log Monitor Live Console Stream](assets/image4.png)
 
-### 3. Incident Containment Network Kill-Switch
+### 3. Snapshot Network Traffic Analysis
 
-When system isolation is triggered, the response engine drops active network configuration bindings immediately via interface state control links:
+The traffic engine captures raw network packet frames over a finite evaluation window before running statistical calculations to flag volume anomalies or high-frequency network talkers:
+
+```bash
+tcpdump -i "$INTERFACE" -c "$PACKET_COUNT" -nn -w "$CAPTURE_FILE" 2>/dev/null
+```
+
+The captured telemetry is parsed systematically to extract protocols, source/destination IPs, and payload data sizes.
+
+![Network Traffic Analyzer Interface](assets/image5.png)
+
+### 4. Firewall Rule Hardening Execution
+
+The hardening utility interfaces natively with the Uncomplicated Firewall (ufw) subsystem to control perimeter parameters and switch the local network posture between open and default-deny configurations:
+
+```bash
+sudo ufw default deny incoming && sudo ufw default allow outgoing && sudo ufw enable
+```
+
+Administrators can use the interface to safely apply strict access control list adjustments dynamically.
+
+![Firewall Hardening Panel](assets/image6.png)
+
+### 5. Incident Containment Network Kill-Switch
+
+When an active host compromise is verified, the response engine drops active layer-2 and layer-3 configurations completely to isolate the machine from the physical or virtual segment:
 
 ```bash
 sudo ip link set dev "$INTERFACE" down
 ```
 
-This cuts off remote attacker persistence across compromised links instantly.
+This immediately severs remote command-and-control persistence loops and protects adjacent network assets from lateral movement.
 
-![Incident Response Containment View](assets/image5.png)
+![Incident Response Containment View](assets/image7.png)
 
 ---
 
 ## Skills Applied
 
-- Python multi-threading and GUI orchestration (`customtkinter`)
+- Python multi-threading and GUI orchestration `(customtkinter)`
 - Asynchronous subprocess pipeline handling
-- Network packet sniffing and traffic telemetry (`tcpdump`)
-- Linux authentication auditing (`auth.log`)
-- Netfilter firewall policy enforcement (`ufw`)
+- Network packet sniffing and traffic telemetry `(tcpdump)`
+- Linux authentication auditing `(auth.log)`
+- Netfilter firewall policy enforcement `(ufw)`
 - Incident response containment and interface isolation
 - Bash scripting engineering and structural directory handling
-- Linux permission privilege structures (`sudo` execution context)
+- Linux permission privilege structures (sudo execution context)
 
 ---
 
