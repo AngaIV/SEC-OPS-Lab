@@ -27,8 +27,17 @@ A security operations control panel that bridges custom Python orchestration wit
 
 A multi-threaded Python front-end built using customtkinter that spawns asynchronous subprocess pipelines to securely drive root-level system scripts.
 
-![System Architecture and Process Routing](assets/image2.png)
-
+```text
+                           [ Security Operations Lab GUI ]
+                                         │
+        ┌───────────────┬────────────────┼───────────────┬───────────────┐
+        ▼               ▼                ▼               ▼               ▼
+   [ Module 1 ]    [ Module 2 ]     [ Module 3 ]    [ Module 4 ]    [ Module 5 ]
+   Vuln Scanner    Log Monitor    Traffic Analyzer   Hardening    Incident Response
+        │               │                │               │               │
+        ▼               ▼                ▼               ▼               ▼
+     (nmap)       (auth.log)        (tcpdump)          (ufw)        (ip link)
+```
 ---
 
 ## Configuration and Implementation
