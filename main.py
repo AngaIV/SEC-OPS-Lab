@@ -24,7 +24,7 @@ class SecurityControlPanel(ctk.CTk):
         self.geometry("1000x650")
         self.resizable(False, False)
 
-        # Configure 2-column grid layout
+        # 2-column grid layout
         self.grid_columnconfigure(1, weight=1)
         self.grid_rowconfigure(0, weight=1)
 
@@ -116,7 +116,7 @@ class SecurityControlPanel(ctk.CTk):
             self.toggle_btn.grid(row=0, column=0, pady=10)
             self.log_to_terminal("[Status] IDS ready...")
 
-        # MODULE 3: TRAFFIC ANALYZER (SNAPSHOT MODEL)
+        # MODULE 3: TRAFFIC ANALYZER
         elif view_name == "traffic":
             self.view_title.configure(text="Module 3: Live Network Traffic Analysis")
             self.btn_sniff = ctk.CTkButton(self.controls_frame, text="Capture & Analyze Packets", fg_color="#2980B9", hover_color="#2471A3", command=self.execute_traffic_analysis)
