@@ -20,7 +20,7 @@ class SecurityControlPanel(ctk.CTk):
         super().__init__()
 
         # Window Configurations
-        self.title("Enterprise Security Control Panel")
+        self.title("Anga Peter's Security Operations Lab")
         self.geometry("1000x650")
         self.resizable(False, False)
 
