@@ -7,7 +7,6 @@
 
 A security operations control panel that bridges custom Python orchestration with native Linux binaries. The system brings core defensive capabilities like vulnerability scanning, real-time log monitoring, packet analysis, firewall hardening, and immediate network isolation into a unified desktop interface for an Ubuntu deployment.
 
-![Project Dashboard Overview](assets/image1.png)
 
 ---
 
