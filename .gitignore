@@ -1,0 +1,18 @@
+#Virtual Environment
+env/
+venv/
+ENV/
+
+#Python Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+#PyInstaller Build Artifacts
+build/
+dist/
+*.spec
+
+#Temporary system capture logs
+*.pcap
