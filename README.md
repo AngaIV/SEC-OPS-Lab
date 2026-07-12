@@ -1,4 +1,4 @@
-# SEC-OPS-Lab: Enterprise Security Control Panel
+# SEC-OPS-Lab: Security Operations Lab
 **Modular Security Operations, Network Traffic Sniffing, and Automated Containment**
 
 ---
