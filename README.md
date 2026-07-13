@@ -111,8 +111,8 @@ This immediately disconnects the system from the network, preventing further com
 - Network packet sniffing and traffic telemetry `(tcpdump)`
 - Linux authentication auditing `(auth.log)`
 - Netfilter firewall policy enforcement `(ufw)`
-- Incident response containment and interface isolation
-- Bash scripting engineering and structural directory handling
+- Incident response, containment and interface isolation
+- Bash scripting, engineering and structural directory handling
 - Linux permission privilege structures (sudo execution context)
 
 ---
@@ -132,7 +132,7 @@ sudo apt install nmap tcpdump ufw python3-pip python3-venv -y
 
 ### 1. Clone the Workspace
 ```bash
-git clone git@github.com:AngaIV/SEC-OPS-Lab.git
+git clone https://github.com/AngaIV/SEC-OPS-Lab.git
 cd SEC-OPS-Lab
 ```
 
@@ -149,7 +149,7 @@ Because the application modifies network interfaces and firewall rules, run it w
 sudo ./env/bin/python main.py
 ```
 
-### 4. Optional: Compile standalone Binary
+### 4. Optional: Compile a standalone Binary
 ```bash
 pip install pyinstaller
 pyinstaller --clean --onefile --collect-all customtkinter --add-data "scripts:scripts" main.py
