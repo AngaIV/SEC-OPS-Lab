@@ -5,7 +5,7 @@
 
 ## About the Project
 
-A security operations control panel that bridges custom Python GUI with native Linux binaries. The system brings core defensive capabilities like vulnerability scanning, real-time log monitoring, packet analysis, firewall hardening, and immediate network isolation into a unified desktop interface for an Linux deployment.
+A security operations control panel that connects a custom Python GUI with native Linux binaries. The system brings together core defensive capabilities such as vulnerability scanning, real-time log monitoring, packet analysis, firewall hardening, and network isolation in a single desktop interface for Linux.
 
 
 ---
@@ -24,7 +24,7 @@ A security operations control panel that bridges custom Python GUI with native L
 
 ## Technical Architecture
 
-A multi-threaded Python front-end built using customtkinter that spawns asynchronous subprocess pipelines to securely drive root-level system scripts.
+A multi-threaded Python front-end built with customtkinter that launches asynchronous subprocesses to safely execute root-level system scripts.
 
 ```text
                            [ Security Operations Lab GUI ]
@@ -43,62 +43,62 @@ A multi-threaded Python front-end built using customtkinter that spawns asynchro
 
 ### 1. Automated Vulnerability Assessment
 
-The scanning engine launches non-destructive network footprinting sweeps against specified target hosts to map the active attack surface and audit open port states:
+The scanning engine performs non-destructive network scans against specified target hosts to map the attack surface and identify open ports:
 
 ```bash
 nmap -sV -p- --open "$TARGET_IP" -oN "$SCAN_OUTPUT_FILE"
 ```
 
-The application parses the output to display live port metrics and service configurations directly onto the dashboard.
+The application parses the output and displays live port information and detected services on the dashboard.
 
 ![Vulnerability Scanner Interface](screenshots/module1.png)
 
 ### 2. Multi-Threaded Real-Time Log Monitoring
 
-To keep the GUI fluid and responsive while processing continuous file streams, the Intrusion Detection module offloads execution to a background worker thread, sequentially tracking system authentication logs:
+To keep the GUI responsive while processing continuous log streams, the intrusion detection module runs in a background worker thread that continuously monitors system authentication logs:
 
 ```python
 self.monitor_thread = threading.Thread(target=self.log_stream_worker, daemon=True)
 self.monitor_thread.start()
 ```
 
-The underlying script continuously tails /var/log/auth.log to parse and highlight active authentication failures.
+The underlying script continuously tails ```/var/log/auth.log``` to detect and highlight authentication failures.
 
 ![Log Monitor Live Console Stream](screenshots/module2.png)
 
 ### 3. Snapshot Network Traffic Analysis
 
-The traffic engine captures raw network packet frames over a finite evaluation window before running statistical calculations to flag volume anomalies or high-frequency network talkers:
+The traffic engine captures network packets over a fixed time window before performing statistical analysis to identify traffic spikes or unusually active hosts:
 
 ```bash
 tcpdump -i "$INTERFACE" -c "$PACKET_COUNT" -nn -w "$CAPTURE_FILE" 2>/dev/null
 ```
 
-The captured telemetry is parsed systematically to extract protocols, source/destination IPs, and payload data sizes.
+The captured data is then parsed to extract protocols, source and destination IP addresses, and packet sizes.
 
 ![Network Traffic Analyzer Interface](screenshots/module3.png)
 
 ### 4. Firewall Rule Hardening Execution
 
-The hardening utility interfaces natively with the Uncomplicated Firewall (ufw) subsystem to control perimeter parameters and switch the local network posture between open and default-deny configurations:
+The hardening utility interacts with the Uncomplicated Firewall (ufw) to switch the local network between open and default-deny configurations:
 
 ```bash
 sudo ufw default deny incoming && sudo ufw default allow outgoing && sudo ufw enable
 ```
 
-Administrators can use the interface to safely apply strict access control list adjustments dynamically.
+Administrators can use the interface to safely and dynamically apply firewall rule changes.
 
 ![Firewall Hardening Panel](screenshots/module4.png)
 
 ### 5. Incident Containment Network Kill-Switch
 
-When an active host compromise is verified, the response engine drops active layer-2 and layer-3 configurations completely to isolate the machine from the physical or virtual segment:
+When a host compromise is confirmed, the response engine disables the network interface to isolate the machine from the physical or virtual network:
 
 ```bash
 sudo ip link set dev "$INTERFACE" down
 ```
 
-This immediately severs remote command-and-control persistence loops and protects adjacent network assets from lateral movement.
+This immediately disconnects the system from the network, preventing further communication and helping limit lateral movement.
 
 ![Incident Response Containment View](screenshots/module5.png)
 
@@ -119,7 +119,7 @@ This immediately severs remote command-and-control persistence loops and protect
 
 ## Prerequisites
 
-The control panel relies on system binaries requiring root execution privileges. Ensure the following tools are installed on the host machine:
+The control panel relies on system binaries that require root privileges. Ensure the following tools are installed on the host machine:
 
 ```bash
 sudo apt update
@@ -144,7 +144,7 @@ pip install customtkinter
 ```
 
 ### 3. Run the Control Panel
-Because the application configures network cards and firewalls, execute the environment runner with root permissions:
+Because the application modifies network interfaces and firewall rules, run it with root privileges:
 ```bash
 sudo ./env/bin/python main.py
 ```
