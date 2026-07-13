@@ -51,7 +51,7 @@ nmap -sV -p- --open "$TARGET_IP" -oN "$SCAN_OUTPUT_FILE"
 
 The application parses the output to display live port metrics and service configurations directly onto the dashboard.
 
-![Vulnerability Scanner Interface](assets/image3.png)
+![Vulnerability Scanner Interface](screenshots/module1.png)
 
 ### 2. Multi-Threaded Real-Time Log Monitoring
 
@@ -64,7 +64,7 @@ self.monitor_thread.start()
 
 The underlying script continuously tails /var/log/auth.log to parse and highlight active authentication failures.
 
-![Log Monitor Live Console Stream](assets/image4.png)
+![Log Monitor Live Console Stream](screenshots/module2.png)
 
 ### 3. Snapshot Network Traffic Analysis
 
@@ -76,7 +76,7 @@ tcpdump -i "$INTERFACE" -c "$PACKET_COUNT" -nn -w "$CAPTURE_FILE" 2>/dev/null
 
 The captured telemetry is parsed systematically to extract protocols, source/destination IPs, and payload data sizes.
 
-![Network Traffic Analyzer Interface](assets/image5.png)
+![Network Traffic Analyzer Interface](screenshots/module3.png)
 
 ### 4. Firewall Rule Hardening Execution
 
@@ -88,7 +88,7 @@ sudo ufw default deny incoming && sudo ufw default allow outgoing && sudo ufw en
 
 Administrators can use the interface to safely apply strict access control list adjustments dynamically.
 
-![Firewall Hardening Panel](assets/image6.png)
+![Firewall Hardening Panel](screenshots/module4.png)
 
 ### 5. Incident Containment Network Kill-Switch
 
@@ -100,7 +100,7 @@ sudo ip link set dev "$INTERFACE" down
 
 This immediately severs remote command-and-control persistence loops and protects adjacent network assets from lateral movement.
 
-![Incident Response Containment View](assets/image7.png)
+![Incident Response Containment View](screenshots/module5.png)
 
 ---
 
